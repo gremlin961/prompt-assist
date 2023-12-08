@@ -13,7 +13,7 @@ import shutil
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 import json
-#from pkg import convert
+from pkg import EnrichPrompt, ComparePrompt
 from fastapi.staticfiles import StaticFiles
 
 
@@ -39,6 +39,12 @@ def form_get(request: Request):
 async def form_post(request: Request, prompt: str = Form(...), context: str = Form(None, required=False)):
    if context is None:
       context = ''
+
+   #compare_data = prompt.GetData('prompt-enrichment', prompt)
+   enrich_data = EnrichPrompt.GetData('prompt-enrichment', prompt)
+
+   compare_data = ComparePrompt.GetData('prompt-compare', prompt, enrich_data)
+
    results = {"prompt": prompt, "context": context}
-   
-   return templates.TemplateResponse("results.html", {"request": request, "results": results})
+
+   return templates.TemplateResponse("results.html", {"request": request, "results": results, "enrich_data": enrich_data, "compare_data": compare_data})
