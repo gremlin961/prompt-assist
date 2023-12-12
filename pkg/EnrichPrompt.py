@@ -50,7 +50,7 @@ def GetData(SECRET, SOURCE_PROMPT, SOUCRE_CONTEXT=''):
     response = model.predict(
         """"""+context+""""""
         """ input: """+prompt+
-        """"""+source_prompt+" Only show the enhanced prompt."
+        """"""+source_prompt+
         """output:
         """,
             **parameters
