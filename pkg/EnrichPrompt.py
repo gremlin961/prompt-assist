@@ -48,8 +48,8 @@ def GetData(SECRET, SOURCE_PROMPT, SOUCRE_CONTEXT=''):
     }
     model = TextGenerationModel.from_pretrained(model)
     response = model.predict(
-        """"""+context+
-        """input: """+prompt+
+        """"""+context+""""""
+        """ input: """+prompt+
         """"""+source_prompt+" Only show the enhanced prompt."
         """output:
         """,

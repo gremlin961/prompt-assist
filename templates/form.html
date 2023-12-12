@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Prompt Comparison and Enrightment Tool</title>
-    <link href="{{ url_for('static', path='styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
 </head>
 <body>
 
@@ -10,10 +10,14 @@
 <h2>Provide a prompt and optionally some additional context.</h2>
 
 <form method="post">
-    Enter your prompt:   <input type="text" name="prompt" class="large-input">
+    Enter your prompt:
+    <br>
+    <textarea id="prompt" name="prompt" class="large-input"></textarea>
     <br>
     <br>
-    Provide some context (optional):   <input type="text" name="context" class="large-input">
+    Provide some context (optional):
+    <br>
+    <textarea id="context" name="context" class="large-input"></textarea>
     <br>
     <br>
     <input type="submit" value="Submit"> <input type="reset" value="Reset">

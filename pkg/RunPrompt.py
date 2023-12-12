@@ -5,7 +5,7 @@ import json
 
 
 
-def GetData(SECRET, SOURCE_PROMPT, ENRICHED_PROMPT):
+def GetData(SECRET, MODEL, PROMPT, CONTEXT=''):
 
     # Define the needed parameters provided in the parameters.json file. 
     # --YOU WILL NEED TO UPDATE THE parameters.json TEMPLATE FILE WITH YOUR OWN PROJECT ID AND SECRET ID NAMES--
@@ -16,11 +16,11 @@ def GetData(SECRET, SOURCE_PROMPT, ENRICHED_PROMPT):
     #secret_ver = PARAMETERS['secret_ver']
     project_id = 'rkiles-demo-host-vpc'
     location = 'us-central1'
-    model = 'text-bison'
+    model_type = MODEL
     secret_id = SECRET
     secret_ver = 'latest'
-    source_prompt = SOURCE_PROMPT
-    enriched_prompt = ENRICHED_PROMPT
+    prompt = PROMPT
+    context = CONTEXT
     
     # Pull the prompt data and parameters from GCP Secret Manager. This data is stored in the same json format as the my-prompts library in the Vertex Language console.
     data = SecurePrompt.GetValue(project_id, secret_id, secret_ver)
@@ -32,8 +32,8 @@ def GetData(SECRET, SOURCE_PROMPT, ENRICHED_PROMPT):
     temp = values['parameters']['temperature']
     top_p = values['parameters']['topP']
     top_k = values['parameters']['topK']
-    context = values['context']
-    prompt = values['testData'][0]['inputs'][0]
+    #context = values['context']
+    #prompt = values['testData'][0]['inputs'][0]
 
 
     # Initialize the vertex AI text-bison model with values set from the previous step
@@ -46,13 +46,11 @@ def GetData(SECRET, SOURCE_PROMPT, ENRICHED_PROMPT):
         "top_p": top_p,
         "top_k": top_k
     }
-    model = TextGenerationModel.from_pretrained(model)
+    model = TextGenerationModel.from_pretrained(model_type)
     response = model.predict(
         """"""+context+""""""
-        """ input: """+prompt+ 
-        """ Prompt 1: """+source_prompt+
-        """"""+" Prompt 2: """+enriched_prompt+
-        """output:
+        """ input: """+prompt+
+        """ output:
         """,
             **parameters
     )

@@ -13,7 +13,7 @@ import shutil
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 import json
-from pkg import EnrichPrompt, ComparePrompt
+from pkg import EnrichPrompt, ComparePrompt, RunPrompt
 from fastapi.staticfiles import StaticFiles
 
 
@@ -48,3 +48,21 @@ async def form_post(request: Request, prompt: str = Form(...), context: str = Fo
    results = {"prompt": prompt, "context": context}
 
    return templates.TemplateResponse("results.html", {"request": request, "results": results, "enrich_data": enrich_data, "compare_data": compare_data})
+
+
+# Compare the output of both prompts
+@app.post("/output", response_class=HTMLResponse)
+async def form_post(request: Request, context: str = Form(...), prompt: str = Form(...), enrich_data: str = Form(...), model_type: str = Form(...)):
+
+   response1 = RunPrompt.GetData('empty-prompt', model_type, prompt, context)
+   response2 = RunPrompt.GetData('empty-prompt', model_type, enrich_data, context)
+
+   #compare_response = ComparePrompt.GetData('prompt-compare', response1, response2)
+
+   results = {"context": context, "prompt1": prompt, "prompt2": enrich_data, 'response1': response1, 'response2': response2, "model_type": model_type}
+   #results = {"context": context, "prompt1": prompt, "prompt2": enrich_data, "model_type": model_type}
+
+
+   #return templates.TemplateResponse("compare.html", {"request": request, "results": results, "compare_response": compare_response})   
+   return templates.TemplateResponse("compare.html", {"request": request, "results": results})  
+

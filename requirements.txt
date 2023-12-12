@@ -4,3 +4,4 @@ fastapi[all]
 pydantic
 python-multipart
 uvicorn
+pyyaml
