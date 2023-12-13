@@ -2,6 +2,9 @@ import vertexai
 from vertexai.language_models import TextGenerationModel
 from pkg import SecurePrompt 
 import json
+# Add support for Gemini models
+from vertexai.preview import generative_models
+from vertexai.preview.generative_models import GenerativeModel, Image, Content, Part, Tool, FunctionDeclaration, GenerationConfig, HarmCategory, HarmBlockThreshold
 
 
 
@@ -46,13 +49,20 @@ def GetData(SECRET, MODEL, PROMPT, CONTEXT=''):
         "top_p": top_p,
         "top_k": top_k
     }
-    model = TextGenerationModel.from_pretrained(model_type)
-    response = model.predict(
-        """"""+context+""""""
-        """ input: """+prompt+
-        """ output:
-        """,
-            **parameters
-    )
+    if model_type == 'gemini-pro':
+        model = GenerativeModel("gemini-pro")
+        response = model.generate_content(
+            '"'+context+'"'+
+            '"'+prompt+'"'
+        )
+    else:
+        model = TextGenerationModel.from_pretrained(model_type)
+        response = model.predict(
+            """"""+context+""""""
+            """ input: """+prompt+
+            """ output:
+            """,
+                **parameters
+        )
     # Return the response from the model to main.py
     return response.text

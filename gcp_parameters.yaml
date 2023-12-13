@@ -1,0 +1,5 @@
+project_id: rkiles-demo-host-vpc
+location: us-central1
+enrich_prompt: prompt-enrichment
+compare_prompt: prompt-compare
+empty_prompt: empty-prompt

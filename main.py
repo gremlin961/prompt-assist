@@ -56,6 +56,7 @@ async def form_post(request: Request, context: str = Form(...), prompt: str = Fo
    if context is None:
       context = ' '
 
+
    response1 = RunPrompt.GetData('empty-prompt', model_type, prompt, context)
    response2 = RunPrompt.GetData('empty-prompt', model_type, enrich_data, context)
 
