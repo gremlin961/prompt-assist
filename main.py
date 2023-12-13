@@ -38,7 +38,7 @@ def form_get(request: Request):
 @app.post("/", response_class=HTMLResponse)
 async def form_post(request: Request, prompt: str = Form(...), context: str = Form(None, required=False)):
    if context is None:
-      context = ''
+      context = ' '
 
    #compare_data = prompt.GetData('prompt-enrichment', prompt)
    enrich_data = EnrichPrompt.GetData('prompt-enrichment', prompt)
@@ -54,7 +54,7 @@ async def form_post(request: Request, prompt: str = Form(...), context: str = Fo
 @app.post("/output", response_class=HTMLResponse)
 async def form_post(request: Request, context: str = Form(...), prompt: str = Form(...), enrich_data: str = Form(...), model_type: str = Form(...)):
    if context is None:
-      context = ''
+      context = ' '
 
    response1 = RunPrompt.GetData('empty-prompt', model_type, prompt, context)
    response2 = RunPrompt.GetData('empty-prompt', model_type, enrich_data, context)
