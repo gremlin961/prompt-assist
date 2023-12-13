@@ -53,6 +53,8 @@ async def form_post(request: Request, prompt: str = Form(...), context: str = Fo
 # Compare the output of both prompts
 @app.post("/output", response_class=HTMLResponse)
 async def form_post(request: Request, context: str = Form(...), prompt: str = Form(...), enrich_data: str = Form(...), model_type: str = Form(...)):
+   if context is None:
+      context = ''
 
    response1 = RunPrompt.GetData('empty-prompt', model_type, prompt, context)
    response2 = RunPrompt.GetData('empty-prompt', model_type, enrich_data, context)
