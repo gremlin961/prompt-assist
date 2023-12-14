@@ -10,36 +10,22 @@
 <h2>Prompt Results: </h2>
 
 <form method="POST">
-    Context:
+    Prompt:
     <br>
-    {{ results.context }}
-    <br>
-    <br>
-    Model Type:
-    <br>
-    {{ results.model_type }}
-    <br>
+    {{ results.prompt }}
     <br>
     <div class="container">
         <div class="section">
-            <h3>Original Prompt</h3>
-            Original Prompt:
+            <h3>Model 1</h3>
+            {{ results.model1_type }}:
             <br>
-            {{ results.prompt1 }}
-            <br>
-            <br>
-            Original Prompt Response:
             <br>
             {{ results.response1 }}
         </div>
         <div class="section">
-            <h3>Enriched Prompt</h3>
-            Enriched Prompt:
+            <h3>Model 2</h3>
+            {{ results.model2_type }}:
             <br>
-            {{ results.prompt2 }}
-            <br>
-            <br>
-            Enriched Prompt Response:
             <br>
             {{ results.response2 }}
         </div>

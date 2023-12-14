@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Model Comparison and Prompt Enrichment Tool</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css" />
+</head>
+<body>
+
+<h1>Model Comparison and Prompt Enrichment Tool</h1>
+<h2>Provide a prompt and select two models to compare.</h2>
+
+<form method="post">
+    Enter your prompt:
+    <br>
+    <textarea id="prompt" name="prompt" class="large-input"></textarea>
+    <br>
+    <br>
+    Select the models to use for comparison
+    <br>
+    <label for="model1_type">Model 1:</label>
+    <select name="model1_type" id="model1_type">
+        <option value="text-bison">Text-Bison</option>
+        <option value="text-unicorn">Text-Unicorn</option>
+        <option value="text-bison-32k">Text-Bison-32k</option>
+        <option value="gemini-pro">Gemini-Pro</option>
+    </select>
+    <br>
+    <label for="model2_type">Model 2:</label>
+    <select name="model2_type" id="model2_type">
+        <option value="text-bison">Text-Bison</option>
+        <option value="text-unicorn">Text-Unicorn</option>
+        <option value="text-bison-32k">Text-Bison-32k</option>
+        <option value="gemini-pro">Gemini-Pro</option>
+    </select>
+    <br>
+    <br>
+    <input type="submit" value="Submit"> <input type="reset" value="Reset">
+
+</form>
+<br>
+<br>
+    <a href="/">
+        <button>Back</button>
+    </a>
+</body>
+</html>

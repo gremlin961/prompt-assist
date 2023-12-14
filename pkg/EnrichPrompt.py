@@ -5,7 +5,7 @@ import json
 
 
 
-def GetData(SECRET, SOURCE_PROMPT, SOUCRE_CONTEXT=''):
+def GetData(SECRET, SOURCE_PROMPT, SOURCE_CONTEXT=''):
 
     # Define the needed parameters provided in the parameters.json file. 
     # --YOU WILL NEED TO UPDATE THE parameters.json TEMPLATE FILE WITH YOUR OWN PROJECT ID AND SECRET ID NAMES--
@@ -20,7 +20,7 @@ def GetData(SECRET, SOURCE_PROMPT, SOUCRE_CONTEXT=''):
     secret_id = SECRET
     secret_ver = 'latest'
     source_prompt = SOURCE_PROMPT
-    #source_context = SOURCE_CONTEXT
+    source_context = SOURCE_CONTEXT
     
     # Pull the prompt data and parameters from GCP Secret Manager. This data is stored in the same json format as the my-prompts library in the Vertex Language console.
     data = SecurePrompt.GetValue(project_id, secret_id, secret_ver)
@@ -50,7 +50,7 @@ def GetData(SECRET, SOURCE_PROMPT, SOUCRE_CONTEXT=''):
     response = model.predict(
         """"""+context+""""""
         """ input: """+prompt+
-        """"""+source_prompt+
+        """ """+source_context+""" """+source_prompt+
         """output:
         """,
             **parameters

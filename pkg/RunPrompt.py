@@ -52,8 +52,15 @@ def GetData(SECRET, MODEL, PROMPT, CONTEXT=''):
     if model_type == 'gemini-pro':
         model = GenerativeModel("gemini-pro")
         response = model.generate_content(
-            '"'+context+'"'+
-            '"'+prompt+'"'
+            '"'+context+'"'+'"'+prompt+'"',
+            generation_config=GenerationConfig(
+                temperature=temp,
+                top_p=top_p,
+                top_k=top_k,
+                candidate_count=c_count,
+                max_output_tokens=max_output,
+                stop_sequences=["STOP!"],
+            )
         )
     else:
         model = TextGenerationModel.from_pretrained(model_type)
@@ -66,3 +73,4 @@ def GetData(SECRET, MODEL, PROMPT, CONTEXT=''):
         )
     # Return the response from the model to main.py
     return response.text
+
