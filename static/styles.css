@@ -102,3 +102,20 @@ p {
 .section {
     width: 50%;
 }
+
+/* Styles for the processing screen */
+#div2 text{
+  font-family: 'Helvetica', sans-serif; /* Modern font */
+  font-weight: bold;
+  color: #7e7e7ea0; /* Dark gray text */
+}
+
+#div2 img {
+  position: fixed; /* Position the image in the center of the screen */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the image */
+  width: 50vw; /* Set the width to 75% of the viewport width */
+  height: 50vh; /* Set the height to 75% of the viewport height */
+  border: 10px solid white; /* Add a white border */
+}

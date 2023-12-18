@@ -9,39 +9,67 @@
 <h1>Model Comparison and Prompt Enrichment Tool</h1>
 <h2>Provide a prompt and select two models to compare.</h2>
 
-<form method="post">
-    Enter your prompt:
-    <br>
-    <textarea id="prompt" name="prompt" class="large-input"></textarea>
-    <br>
-    <br>
-    Select the models to use for comparison
-    <br>
-    <label for="model1_type">Model 1:</label>
-    <select name="model1_type" id="model1_type">
-        <option value="text-bison">Text-Bison</option>
-        <option value="text-unicorn">Text-Unicorn</option>
-        <option value="text-bison-32k">Text-Bison-32k</option>
-        <option value="gemini-pro">Gemini-Pro</option>
-    </select>
-    <br>
-    <label for="model2_type">Model 2:</label>
-    <select name="model2_type" id="model2_type">
-        <option value="text-bison">Text-Bison</option>
-        <option value="text-unicorn">Text-Unicorn</option>
-        <option value="text-bison-32k">Text-Bison-32k</option>
-        <option value="text-bison@001">Text-Bison v001</option>
-        <option value="gemini-pro">Gemini-Pro</option>
-    </select>
-    <br>
-    <br>
-    <input type="submit" value="Submit"> <input type="reset" value="Reset">
+<div id="div1">
+    <form method="post">
+        Enter your prompt:
+        <br>
+        <textarea id="prompt" name="prompt" class="large-input"></textarea>
+        <br>
+        <br>
+        Select the models to use for comparison
+        <br>
+        <label for="model1_type">Model 1:</label>
+        <select name="model1_type" id="model1_type">
+            <option value="text-bison">Text-Bison</option>
+            <option value="text-unicorn">Text-Unicorn</option>
+            <option value="text-bison-32k">Text-Bison-32k</option>
+            <option value="gemini-pro">Gemini-Pro</option>
+        </select>
+        <br>
+        <label for="model2_type">Model 2:</label>
+        <select name="model2_type" id="model2_type">
+            <option value="text-bison">Text-Bison</option>
+            <option value="text-unicorn">Text-Unicorn</option>
+            <option value="text-bison-32k">Text-Bison-32k</option>
+            <option value="text-bison@001">Text-Bison v001</option>
+            <option value="gemini-pro">Gemini-Pro</option>
+        </select>
+        <br>
+        <br>
+        <input type="submit" id="submit" value="Submit"> <input type="reset" value="Reset">
 
-</form>
-<br>
-<br>
-    <a href="/">
-        <button>Back</button>
-    </a>
+    </form>
+    <br>
+    <br>
+        <a href="/">
+            <button>Back</button>
+        </a>
+</div>
+
+<div id="div2" style="display: none;">
+    <form method="post">
+        <b><i>Processing, please wait...</i></b>
+        <br>
+        <!--<img src="/static/loading.png" alt="Loading..." />-->
+</div>
+
+<script>
+    const toggleButton = document.getElementById("submit");
+    const div1 = document.getElementById("div1");
+    const div2 = document.getElementById("div2");
+
+    toggleButton.addEventListener("click", () => {
+        if (div1.style.display === "none") {
+        div1.style.display = "block";
+        div2.style.display = "none";
+        } else {
+        div1.style.display = "none";
+        div2.style.display = "block";
+
+        // Submit the form after toggling the divs
+        document.querySelector("form").submit();
+        }
+    });
+</script>
 </body>
 </html>
