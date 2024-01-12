@@ -1,4 +1,4 @@
-# This web service uses FastAPI to accept requests to convert json files to a standard data structure
+# This web service uses FastAPI to provide users with a tool to help create and test better prompts for use with GenAI models.
 #
 # The following modules are used in this service
 # fastapi - Web service framework used to build the API
